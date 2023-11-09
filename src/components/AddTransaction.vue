@@ -23,11 +23,20 @@
 
 <script setup>
 import {ref} from 'vue';
+import {useToast} from 'vue-toastification';
 
 const text = ref('');
 const amount = ref('');
+const toast = useToast();
 
 const onsubmit = () => {
+	if (!text.value || !amount.value) {
+		toast.error('Both fields must be filled');
+		return;
+	}
 	console.log(text.value, amount.value);
+
+	text.value = '';
+	amount.value = '';
 };
 </script>
